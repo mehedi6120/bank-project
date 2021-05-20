@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Bank</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+      
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div id="login-area">
+            <h1 class="text-center">Welcome to <b>Bank</b></h1>
+            <div class="submit-area shadow p-3 mb-5 bg-white rounded">
+              <h4>Login</h4>
+              <div class="form-group">
+                <input type="email" class="form-control" name="" id="" aria-describedby="emailHelpId" placeholder="Email">
+                <br>
+                <input type="password" class="form-control" name="" id="" aria-describedby="emailHelpId" placeholder="Password">
+                <br>
+                <button class="btn btn-primary " id="login">Login</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+
+        </div>
+      </div>
+    </div>
+   
+
+
+
+    <div id="transaction-area">
+     <div class="container">
+       <h1 class="text-center p-3 mb-3">Transaction Area</h1>
+       <div class="row">
+        <div class="col-md-4">
+          <div class="p-4 mb-2 bg-danger text-center text-white rounded">
+            <h5>Deposit</h5>
+            <h2 class="font-weight-bold">$ <span id="currentDeposit">00</span></h2>
+          </div>
+        </div> 
+        <div class="col-md-4">
+          <div class="p-4 mb-2 rounded bg-success text-center text-white">
+            <h5>Withdraw</h5>
+            <h2 class="font-weight-bold">$ <span id="currentWithdraw">00</span> </h2>
+          </div>
+        </div>
+         <div class="col-md-4">
+          <div class="p-4 mb-2 rounded bg-dark text-center text-white">
+            <h5>Balance</h5>
+            <h2 class="font-weight-bold">$ <span id="currentBalance">00</span></h2>
+          </div>
+        </div>
+          
+       </div>
+       <div class="row pt-4">
+         <div class="col-md-4 offset-md-2">
+           <div class="shadow p-3 mb-5 bg-white rounded">
+              <h4>Deposit</h4>
+            <div class="form-group">
+              <input type="number"
+                class="form-control" name="" id="depositAmount" aria-describedby="helpId" placeholder="$ amount you want to deposit">
+                <br>
+                <button class="btn btn-primary " id="deposit">Deposit</button>
+            </div>
+          </div>
+         </div>
+          <div class="col-md-4">
+            <div class="shadow p-3 mb-5 bg-white rounded">
+              <h4>Withdraw</h4>
+              <div class="form-group">
+                <input type="number" class="form-control" name="" id="withdrawAmount" aria-describedby="helpId" placeholder="$ amount you want to withdraw">
+                <br>
+                <button class="btn btn-primary " id="withdraw">Deposit</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+           
+         </div>
+       </div>
+     </div>
+
+    </div>
+
+
+    <script>
+      const loginBtn = document.getElementById("login");
+      loginBtn.addEventListener('click',()=>{
+        const loginArea = document.getElementById("login-area");
+        loginArea.style.display = "none";
+        const transactionArea = document.getElementById("transaction-area");
+        transactionArea.style.display = "block";
+      })
+
+      //deposit button 
+      const depositBtn = document.getElementById("deposit");
+      depositBtn.addEventListener('click',()=>{
+      const depositNumber = getInputNumber("depositAmount");
+      
+      updateSpanText("currentDeposit", depositNumber);
+      updateSpanText("currentBalance", depositNumber);
+    
+      
+      document.getElementById('depositAmount').value = "";
+    });
+
+    //withdraw butoon event
+    const withdrawBtn = document.getElementById("withdraw");
+    withdrawBtn.addEventListener('click',()=>{
+      const withdrawAmountNumber = getInputNumber("withdrawAmount");
+      console.log(withdrawAmountNumber);
+        updateSpanText("currentWithdraw", withdrawAmountNumber);
+        updateSpanText("currentBalance",-1 * withdrawAmountNumber);
+      document.getElementById('withdrawAmount').value = "";
+
+    })
+
+    function getInputNumber(id){
+      const amount = document.getElementById(id).value;
+      parsedAmount = parseFloat(amount);
+      return parsedAmount;
+
+    }
+
+    function updateSpanText(id,depositNumber){
+      const current = document.getElementById(id).innerText;
+      const currentNumber = parseFloat(current);
+      const totalAmount =   currentNumber + depositNumber;
+      document.getElementById(id).innerText = totalAmount;
+    }
+
+
+    </script>
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
